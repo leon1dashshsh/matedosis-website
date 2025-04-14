@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matedosis | Proyecto Amateur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(to bottom, #0f0f0f, #1c1c1c);
+      color: #fff;
+    }
+    header {
+      background-color: #000;
+      text-align: center;
+      padding: 1rem;
+    }
+    header img {
+      width: 140px;
+      height: auto;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1, h2 {
+      color: #f4f4f4;
+    }
+    .discord-button {
+      display: inline-block;
+      background-color: #5865F2;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      margin: 1.5rem auto;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .discord-button:hover {
+      background-color: #4752c4;
+    }
+    .formulario {
+      display: none;
+      margin-top: 3rem;
+      text-align: left;
+    }
+    .formulario input, .formulario textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+      border: none;
+    }
+    .formulario button {
+      background-color: #00a86b;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    section {
+      margin-top: 4rem;
+      animation: fadein 1s ease-in-out;
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script>
+    function toggleContacto() {
+      const form = document.querySelector('.formulario');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <img src="ChatGPT Image 5 abr 2025, 09_51_08 p.m..png" alt="Logo Matedosis">
+  </header>
+  <div class="container">
+    <a class="discord-button" href="https://discord.gg/Xt4zuEkyKZ" target="_blank">Unite a nuestro Discord</a>
+
+    <section>
+      <h2>Sobre el Proyecto</h2>
+      <p>
+        Matedosis nace como una propuesta diferente: una comunidad que valora el orden, la mejora continua y el trabajo en equipo por encima del individualismo. Nuestro objetivo es formar jugadores con mentalidad competitiva y sólida comprensión del juego, construyendo un entorno de aprendizaje constante. 
+        <br><br>
+        Actualmente, nos encontramos en etapa de consolidación: armando un equipo principal, organizando scrims, definiendo identidades de juego y creando contenido que represente nuestra esencia.
+        <br><br>
+        El futuro de Matedosis incluye una liga interna, streams, material didáctico y una estructura que permita competir y crecer. Todo, construido desde la pasión real por el juego y con visión de largo plazo.
+      </p>
+    </section>
+
+    <section>
+      <h2>Staff de Matedosis</h2>
+      <p><strong>El Abuelo</strong> | Fundador y organizador general 🧉<br>
+      <strong>Darr</strong> | Coordinación interna y gestión de canales 🧩<br>
+      <strong>Vitu</strong> | Organización de pruebas y comunicación con jugadores 📋<br>
+      <strong>Poizo</strong> | Análisis, comunicación y planificación táctica 🧠</p>
+    </section>
+
+    <button class="discord-button" onclick="toggleContacto()">Contacto</button>
+    <section class="formulario">
+      <h2>Contacto</h2>
+      <form>
+        <input type="text" placeholder="Tu nombre" required>
+        <input type="email" placeholder="Tu email" required>
+        <textarea rows="5" placeholder="Tu mensaje..." required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </div>
+</body>
+</html>
