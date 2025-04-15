@@ -128,7 +128,6 @@
         target.classList.add('active');
       }
     }
-
     function toggleContent(id) {
       const current = document.querySelector('.toggle-content.active');
       const target = document.getElementById(id);
@@ -139,7 +138,6 @@
         target.classList.toggle('active');
       }
     }
-
     window.onload = function () {
       showSection('proyecto');
     }
@@ -160,37 +158,8 @@
     <div class="container">
       <a href="https://discord.gg/Xt4zuEkyKZ" target="_blank" class="discord-button">Unite a nuestro Discord</a>
       <h2>Sobre el Proyecto</h2>
-      <p>Matedosis nace como una propuesta diferente: una comunidad que valora el orden, la mejora continua y el trabajo en equipo por encima del individualismo.</p>
+      <p>Matedosis nace como una propuesta diferente: una comunidad que valora el orden, la mejora continua y el trabajo en equipo por encima del individualismo. Nuestro objetivo es formar jugadores con mentalidad competitiva y sólida comprensión del juego, construyendo un entorno de aprendizaje constante.</p>
+      <p>Actualmente, nos encontramos en etapa de consolidación: armando un equipo principal, organizando scrims, definiendo identidades de juego y creando contenido que represente nuestra esencia.</p>
+      <p>El futuro de Matedosis incluye una liga interna, streams, material didáctico y una estructura que permita competir y crecer. Todo, construido desde la pasión real por el juego y con visión de largo plazo.</p>
     </div>
   </section>
-
-  <section id="staff">
-    <div class="container">
-      <h2>Staff de Matedosis</h2>
-      <p>Próximamente más información sobre nuestro equipo organizador.</p>
-    </div>
-  </section>
-
-  <section id="postulaciones">
-    <div class="container">
-      <h2>📥 Quiero unirme a Matedosis</h2>
-      <button class="toggle-button" onclick="toggleContent('form-jugador')">Postularme como jugador</button>
-      <button class="toggle-button" onclick="toggleContent('form-staff')">Postularme como staff</button>
-      <button class="toggle-button" onclick="toggleContent('form-creador')">Postularme como creador de contenido</button>
-      <button class="toggle-button" onclick="toggleContent('form-coach')">Postularme como coach</button>
-
-      <div id="form-staff" class="toggle-content">
-        <form action="https://formsubmit.co/matedosis253@gmail.com" method="POST">
-          <input type="text" name="Nombre" placeholder="Nombre" required>
-          <input type="text" name="Área de interés" placeholder="Área de interés (ej: moderación, diseño gráfico, redes, etc)" required>
-          <textarea name="Habilidades" placeholder="Contanos tus habilidades o conocimientos útiles" required></textarea>
-          <textarea name="Experiencia" placeholder="¿Tenés experiencia previa? Si no, contanos tus ganas de aprender" required></textarea>
-          <input type="text" name="Disponibilidad horaria" placeholder="Disponibilidad horaria" required>
-          <textarea name="Motivación" placeholder="¿Por qué querés unirte al staff de Matedosis?" required></textarea>
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
-    </div>
-  </section>
-</body>
-</html>
