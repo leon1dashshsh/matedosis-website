@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,13 +14,31 @@
       color: #fff;
     }
     header {
-      background-color: #000;
+      background-color: #0f0f0f;
       text-align: center;
-      padding: 1rem;
+      padding: 1.5rem 0 1rem;
     }
     header img {
-      width: 140px;
-      height: auto;
+      height: 100px;
+    }
+    nav {
+      background-color: #000;
+      padding: 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      margin: 0 1.2rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    nav a:hover {
+      color: #39ff14;
     }
     .container {
       max-width: 800px;
@@ -29,8 +46,9 @@
       padding: 2rem;
       text-align: center;
     }
-    h1, h2 {
+    h2 {
       color: #f4f4f4;
+      margin-top: 3rem;
     }
     .discord-button {
       display: inline-block;
@@ -48,79 +66,131 @@
     .discord-button:hover {
       background-color: #4752c4;
     }
-    .formulario {
-      display: none;
-      margin-top: 3rem;
-      text-align: left;
-    }
-    .formulario input, .formulario textarea {
-      width: 100%;
-      padding: 0.7rem;
-      margin: 0.5rem 0;
-      border-radius: 5px;
-      border: none;
-    }
-    .formulario button {
-      background-color: #00a86b;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
     section {
-      margin-top: 4rem;
+      display: none;
       animation: fadein 1s ease-in-out;
+    }
+    section.active {
+      display: block;
+    }
+    .toggle-button {
+      background: linear-gradient(to bottom, #8f00ff, #3f0099);
+      color: white;
+      font-weight: 600;
+      padding: 0.7rem 1.8rem;
+      border: 3px solid #b084ff;
+      border-radius: 40px;
+      cursor: pointer;
+      margin: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+    .toggle-button:hover {
+      transform: scale(1.05);
+    }
+    .toggle-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.6s ease, opacity 0.6s ease;
+    }
+    .toggle-content.active {
+      max-height: 1000px;
+      opacity: 1;
     }
     @keyframes fadein {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+    }
+    button[type="submit"] {
+      background-color: #4a00e0;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
   <script>
-    function toggleContacto() {
-      const form = document.querySelector('.formulario');
-      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+      });
+      const target = document.getElementById(id);
+      if (target) {
+        target.classList.add('active');
+      }
+    }
+
+    function toggleContent(id) {
+      const current = document.querySelector('.toggle-content.active');
+      const target = document.getElementById(id);
+      if (current && current !== target) {
+        current.classList.remove('active');
+      }
+      if (target) {
+        target.classList.toggle('active');
+      }
+    }
+
+    window.onload = function () {
+      showSection('proyecto');
     }
   </script>
 </head>
 <body>
   <header>
     <img src="logo_matedosis.png" alt="Logo Matedosis">
-
   </header>
-  <div class="container">
-    <a class="discord-button" href="https://discord.gg/Xt4zuEkyKZ" target="_blank">Unite a nuestro Discord</a>
+  <nav>
+    <a onclick="showSection('proyecto')">Proyecto</a>
+    <a onclick="showSection('staff')">Staff</a>
+    <a onclick="showSection('postulaciones')">Quiero unirme a Matedosis</a>
+    <a onclick="showSection('contacto')">Contacto</a>
+  </nav>
 
-    <section>
+  <section id="proyecto" class="active">
+    <div class="container">
+      <a href="https://discord.gg/Xt4zuEkyKZ" target="_blank" class="discord-button">Unite a nuestro Discord</a>
       <h2>Sobre el Proyecto</h2>
-      <p>
-        Matedosis nace como una propuesta diferente: una comunidad que valora el orden, la mejora continua y el trabajo en equipo por encima del individualismo. Nuestro objetivo es formar jugadores con mentalidad competitiva y sólida comprensión del juego, construyendo un entorno de aprendizaje constante. 
-        <br><br>
-        Actualmente, nos encontramos en etapa de consolidación: armando un equipo principal, organizando scrims, definiendo identidades de juego y creando contenido que represente nuestra esencia.
-        <br><br>
-        El futuro de Matedosis incluye una liga interna, streams, material didáctico y una estructura que permita competir y crecer. Todo, construido desde la pasión real por el juego y con visión de largo plazo.
-      </p>
-    </section>
+      <p>Matedosis nace como una propuesta diferente: una comunidad que valora el orden, la mejora continua y el trabajo en equipo por encima del individualismo.</p>
+    </div>
+  </section>
 
-    <section>
+  <section id="staff">
+    <div class="container">
       <h2>Staff de Matedosis</h2>
-      <p><strong>El Abuelo</strong> | Fundador y organizador general 🧉<br>
-      <strong>Darr</strong> | Coordinación interna y gestión de canales 🧩<br>
-      <strong>Vitu</strong> | Organización de pruebas y comunicación con jugadores 📋<br>
-      <strong>Poizo</strong> | Análisis, comunicación y planificación táctica 🧠</p>
-    </section>
+      <p>Próximamente más información sobre nuestro equipo organizador.</p>
+    </div>
+  </section>
 
-    <button class="discord-button" onclick="toggleContacto()">Contacto</button>
-    <section class="formulario">
-      <h2>Contacto</h2>
-      <form>
-        <input type="text" placeholder="Tu nombre" required>
-        <input type="email" placeholder="Tu email" required>
-        <textarea rows="5" placeholder="Tu mensaje..." required></textarea>
-        <button type="submit">Enviar</button>
-      </form>
-    </section>
-  </div>
+  <section id="postulaciones">
+    <div class="container">
+      <h2>📥 Quiero unirme a Matedosis</h2>
+      <button class="toggle-button" onclick="toggleContent('form-jugador')">Postularme como jugador</button>
+      <button class="toggle-button" onclick="toggleContent('form-staff')">Postularme como staff</button>
+      <button class="toggle-button" onclick="toggleContent('form-creador')">Postularme como creador de contenido</button>
+      <button class="toggle-button" onclick="toggleContent('form-coach')">Postularme como coach</button>
+
+      <div id="form-staff" class="toggle-content">
+        <form action="https://formsubmit.co/matedosis253@gmail.com" method="POST">
+          <input type="text" name="Nombre" placeholder="Nombre" required>
+          <input type="text" name="Área de interés" placeholder="Área de interés (ej: moderación, diseño gráfico, redes, etc)" required>
+          <textarea name="Habilidades" placeholder="Contanos tus habilidades o conocimientos útiles" required></textarea>
+          <textarea name="Experiencia" placeholder="¿Tenés experiencia previa? Si no, contanos tus ganas de aprender" required></textarea>
+          <input type="text" name="Disponibilidad horaria" placeholder="Disponibilidad horaria" required>
+          <textarea name="Motivación" placeholder="¿Por qué querés unirte al staff de Matedosis?" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
