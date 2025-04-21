@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,16 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matedosis | Proyecto Amateur</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --tr: 0.3s ease;
+      --tr-slow: 0.5s ease;
+      --tr-fade: opacity 0.5s ease, transform 0.5s ease;
+      --accent: #8f00ff;
+      --accent-dark: #3f0099;
+      --bg-dark: #0f0f0f;
+      --bg-darker: #1c1c1c;
+    }
     body {
       margin: 0;
-      font-family: 'Outfit', sans-serif;
-      background: linear-gradient(to bottom, #0f0f0f, #1c1c1c);
+      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(to bottom, var(--bg-dark), var(--bg-darker));
       color: #fff;
+      transition: background var(--tr-slow);
     }
     header {
-      background-color: #0f0f0f;
+      background-color: var(--bg-dark);
       text-align: center;
       padding: 1.5rem 0 1rem;
     }
@@ -35,11 +44,25 @@
       margin: 0 1.2rem;
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.3s ease;
+      transition: color var(--tr);
       cursor: pointer;
     }
     nav a:hover {
-      color: #39ff14;
+      color: var(--accent);
+    }
+    section {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      height: 0;
+      overflow: hidden;
+    }
+    section.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+      height: auto;
     }
     .container {
       max-width: 800px;
@@ -48,101 +71,68 @@
       text-align: center;
     }
     h2 {
-      color: #f4f4f4;
-      margin-top: 3rem;
+      margin-bottom: 1.5rem;
     }
-    .discord-button {
-      display: inline-block;
-      background-color: #5865F2;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      margin: 1.5rem auto;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-    .discord-button:hover {
-      background-color: #4752c4;
-    }
-    section {
-      display: none;
-      animation: fadein 1s ease-in-out;
-    }
-    section.active {
-      display: block;
-    }
-    .toggle-button {
-      background: linear-gradient(to bottom, #8f00ff, #3f0099);
+    .btn-purple {
+      background: linear-gradient(to bottom, var(--accent), var(--accent-dark));
       color: white;
       font-weight: 600;
-      padding: 0.7rem 1.8rem;
-      border: 3px solid #b084ff;
-      border-radius: 40px;
-      cursor: pointer;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 30px;
       margin: 0.5rem;
-      transition: transform 0.2s ease;
+      cursor: pointer;
+      transition: transform var(--tr);
     }
-    .toggle-button:hover {
+    .btn-purple:hover {
       transform: scale(1.05);
     }
-    .toggle-content {
-      max-height: 0;
-      overflow: hidden;
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      visibility: hidden;
       opacity: 0;
-      transition: max-height 0.6s ease, opacity 0.6s ease;
+      transition: var(--tr-fade);
     }
-    .toggle-content.active {
-      max-height: 1000px;
+    .modal.active {
+      visibility: visible;
       opacity: 1;
     }
-    @keyframes fadein {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .modal-content {
+      background: #1f1f1f;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      text-align: left;
     }
-    input, select, textarea {
+    .modal-content h3 {
+      margin-top: 0;
+    }
+    .modal-content input,
+    .modal-content textarea {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
+      margin: 0.5rem 0;
+      padding: 0.7rem;
       border-radius: 8px;
       border: none;
     }
-    button[type="submit"] {
-      background-color: #4a00e0;
+    .close-btn {
+      background: #ff4d4d;
       color: white;
       border: none;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
       cursor: pointer;
-      font-weight: bold;
+      float: right;
+      border-radius: 5px;
     }
   </style>
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(section => {
-        section.classList.remove('active');
-      });
-      const target = document.getElementById(id);
-      if (target) {
-        target.classList.add('active');
-      }
-    }
-    function toggleContent(id) {
-      const current = document.querySelector('.toggle-content.active');
-      const target = document.getElementById(id);
-      if (current && current !== target) {
-        current.classList.remove('active');
-      }
-      if (target) {
-        target.classList.toggle('active');
-      }
-    }
-    window.onload = function () {
-      showSection('proyecto');
-    }
-  </script>
 </head>
 <body>
   <header>
@@ -157,83 +147,91 @@
 
   <section id="proyecto" class="active">
     <div class="container">
-      <a href="https://discord.gg/Xt4zuEkyKZ" target="_blank" class="discord-button">Unite a nuestro Discord</a>
       <h2>Sobre el Proyecto</h2>
-      <p>Matedosis nace como una propuesta diferente: una comunidad que valora el orden, la mejora continua y el trabajo en equipo por encima del individualismo. Nuestro objetivo es formar jugadores con mentalidad competitiva y sólida comprensión del juego, construyendo un entorno de aprendizaje constante.</p>
-      <p>Actualmente, nos encontramos en etapa de consolidación: armando un equipo principal, organizando scrims, definiendo identidades de juego y creando contenido que represente nuestra esencia.</p>
-      <p>El futuro de Matedosis incluye una liga interna, streams, material didáctico y una estructura que permita competir y crecer. Todo, construido desde la pasión real por el juego y con visión de largo plazo.</p>
+      <p>Matedosis nace como una propuesta diferente...</p>
     </div>
   </section>
 
   <section id="staff">
     <div class="container">
-      <h2>Staff de Matedosis</h2>
-      <p>Próximamente más información sobre nuestro equipo organizador.</p>
+      <h2>Staff</h2>
+      <p>Actualmente contamos con un equipo de organización...</p>
     </div>
   </section>
 
   <section id="postulaciones">
     <div class="container">
-      <h2>📥 Quiero unirme a Matedosis</h2>
-      <button class="toggle-button" onclick="toggleContent('form-jugador')">Postularme como jugador</button>
-      <button class="toggle-button" onclick="toggleContent('form-staff')">Postularme como staff</button>
-      <button class="toggle-button" onclick="toggleContent('form-creador')">Postularme como creador de contenido</button>
-      <button class="toggle-button" onclick="toggleContent('form-coach')">Postularme como coach</button>
-
-      <div id="form-jugador" class="toggle-content">
-        <form action="https://formsubmit.co/matedosis253@gmail.com" method="POST">
-          <input type="text" name="Nombre o Nick" placeholder="Nombre o Nick" required>
-          <input type="text" name="Elo actual" placeholder="Elo actual" required>
-          <input type="text" name="Rol principal" placeholder="Rol principal" required>
-          <input type="text" name="Disponibilidad horaria" placeholder="Disponibilidad horaria" required>
-          <textarea name="Pool de campeones" placeholder="Pool de campeones" required></textarea>
-          <textarea name="Estilo de juego" placeholder="Estilo de juego" required></textarea>
-          <textarea name="Experiencia previa" placeholder="Contanos tu experiencia previa" required></textarea>
-          <input type="text" name="Contacto" placeholder="Discord, Whatsapp o Instagram" required>
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
-
-      <div id="form-staff" class="toggle-content">
-        <form action="https://formsubmit.co/matedosis253@gmail.com" method="POST">
-          <input type="text" name="Nombre" placeholder="Nombre" required>
-          <input type="text" name="Área de interés" placeholder="Área de interés (ej: moderación, diseño gráfico, redes, etc)" required>
-          <textarea name="Habilidades" placeholder="Contanos tus habilidades o conocimientos útiles" required></textarea>
-          <textarea name="Experiencia" placeholder="¿Tenés experiencia previa? Si no, contanos tus ganas de aprender" required></textarea>
-          <input type="text" name="Disponibilidad horaria" placeholder="Disponibilidad horaria" required>
-          <textarea name="Motivación" placeholder="¿Por qué querés unirte al staff de Matedosis?" required></textarea>
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
-
-      <div id="form-creador" class="toggle-content">
-        <form action="https://formsubmit.co/matedosis253@gmail.com" method="POST">
-          <input type="text" name="Nombre o Nick" placeholder="Nombre o Nick" required>
-          <textarea name="Redes" placeholder="Link a tus redes (Twitch, TikTok, YouTube, etc)" required></textarea>
-          <textarea name="Tipo de contenido" placeholder="¿Qué tipo de contenido te gustaría crear?" required></textarea>
-          <textarea name="Herramientas" placeholder="¿Qué herramientas usás para editar o diseñar?" required></textarea>
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
-
-      <div id="form-coach" class="toggle-content">
-        <form action="https://formsubmit.co/matedosis253@gmail.com" method="POST">
-          <input type="text" name="Nombre o Nick" placeholder="Nombre o Nick" required>
-          <textarea name="Experiencia" placeholder="Contanos tu experiencia como coach o analista" required></textarea>
-          <textarea name="Estilo" placeholder="¿Cómo es tu estilo de trabajo? ¿Qué áreas dominás?" required></textarea>
-          <textarea name="Disponibilidad" placeholder="Disponibilidad horaria" required></textarea>
-          <textarea name="Herramientas" placeholder="¿Qué herramientas usás para analizar partidas o hacer drafts?" required></textarea>
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
+      <h2>Postulaciones</h2>
+      <p>En esta sección vas a poder postularte a los diferentes roles del proyecto Matedosis.</p>
+      <button class="btn-purple" onclick="openModal('jugador')">Postularme como jugador</button>
+      <button class="btn-purple" onclick="openModal('staff')">Postularme como staff</button>
+      <button class="btn-purple" onclick="openModal('creador')">Postularme como creador de contenido</button>
+      <button class="btn-purple" onclick="openModal('coach')">Postularme como coach</button>
     </div>
   </section>
 
   <section id="contacto">
     <div class="container">
       <h2>Contacto</h2>
-      <p>Podés escribirnos por Discord o redes sociales para más información.</p>
+      <p>Para cualquier duda o consulta podés escribirnos a <strong>matedosis253@gmail.com</strong> o contactarnos por Discord.</p>
     </div>
   </section>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
+      <h3 id="modal-title">Formulario</h3>
+      <div id="modal-body"></div>
+      <button class="btn-purple" style="margin-top: 1rem">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.showSection = function(id) {
+        document.querySelectorAll('section').forEach(section => {
+          section.classList.remove('active');
+        });
+        const target = document.getElementById(id);
+        if (target) {
+          target.classList.add('active');
+        }
+      };
+
+      const formularios = {
+        jugador: `<input type="text" placeholder="Nombre o Nick">
+          <input type="text" placeholder="Elo actual">
+          <input type="text" placeholder="Rol principal">
+          <input type="text" placeholder="Disponibilidad horaria">
+          <textarea rows="2" placeholder="Pool de campeones"></textarea>
+          <textarea rows="2" placeholder="Estilo de juego"></textarea>
+          <textarea rows="2" placeholder="Experiencia previa y expectativas"></textarea>
+          <input type="text" placeholder="Discord, Whatsapp o Instagram">`,
+        staff: `<input type="text" placeholder="Nombre">
+          <input type="text" placeholder="Área de interés (ej: moderación, diseño gráfico, redes, etc)">
+          <textarea rows="2" placeholder="Contanos tus habilidades o conocimientos útiles"></textarea>
+          <textarea rows="2" placeholder="¿Tenés experiencia previa? Si no, contanos tus ganas de aprender"></textarea>
+          <input type="text" placeholder="Disponibilidad horaria">`,
+        creador: `<input type="text" placeholder="Nombre">
+          <input type="text" placeholder="¿Qué tipo de contenido creás? (Tiktoks, streams, etc)">
+          <input type="text" placeholder="Links a tus redes (Twitch, TikTok, YouTube...)">
+          <textarea rows="2" placeholder="¿Tenés conocimientos en edición, diseño u otras herramientas?"></textarea>`,
+        coach: `<input type="text" placeholder="Nombre">
+          <textarea rows="2" placeholder="Experiencia previa y áreas de conocimiento"></textarea>
+          <textarea rows="2" placeholder="Estilo de trabajo y disponibilidad horaria"></textarea>
+          <input type="text" placeholder="Herramientas con las cuales trabajes (LoLalytics, OBS, etc)">`
+      };
+
+      window.openModal = function(rol) {
+        document.getElementById('modal-title').textContent = `Formulario para ${rol}`;
+        document.getElementById('modal-body').innerHTML = formularios[rol] || '';
+        document.getElementById('modal').classList.add('active');
+      };
+
+      window.closeModal = function() {
+        document.getElementById('modal').classList.remove('active');
+      };
+    });
+  </script>
 </body>
 </html>
