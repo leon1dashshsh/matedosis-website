@@ -145,9 +145,11 @@
   </style>
 </head>
 <body>
-<header>
-  <img src="logo_matedosis.png" alt="Logo Matedosis">
+<!-- ... contenido anterior intacto ... -->
+  <header>
+  <img src="logo.png" alt="Logo Matedosis">
 </header>
+
 <nav>
   <a onclick="showSection('proyecto')">Proyecto</a>
   <a onclick="showSection('staff')">Staff</a>
@@ -158,22 +160,21 @@
 <section id="proyecto" class="active">
   <div class="container">
     <h2>Sobre el Proyecto</h2>
-    <p>Matedosis nace como una propuesta diferente: una comunidad que valora el orden, la mejora continua y el trabajo en equipo por encima del individualismo. Nuestro objetivo es formar jugadores con mentalidad competitiva y sólida comprensión del juego, construyendo un entorno de aprendizaje constante.</p>
-    <p>Actualmente, nos encontramos en etapa de consolidación: armando un equipo principal, organizando scrims, definiendo identidades de juego y creando contenido que represente nuestra esencia.</p>
-    <p>El futuro de Matedosis incluye una liga interna, streams, material didáctico y una estructura que permita competir y crecer. Todo, construido desde la pasión real por el juego y con visión de largo plazo.</p>
+    <p>Matedosis es un proyecto amateur con visión profesional que busca formar un equipo de League of Legends con enfoque estratégico, aprendizaje constante y compañerismo. Valoramos la mentalidad, el compromiso y la pasión por superarse.</p>
   </div>
 </section>
 
 <section id="staff">
   <div class="container">
-    <h2>Staff de Matedosis</h2>
-    <p>Próximamente más información sobre nuestro equipo organizador.</p>
+    <h2>Staff</h2>
+    <p>El staff de Matedosis está compuesto por jugadores con experiencia, organizadores y personas apasionadas por el desarrollo de equipos. Si querés sumarte al staff, podés postularte desde la sección de postulaciones.</p>
   </div>
 </section>
 
 <section id="postulaciones">
   <div class="container">
     <h2>Postulaciones</h2>
+    <p>En esta sección vas a poder postularte a los diferentes roles del proyecto Matedosis.</p>
     <button class="btn-purple" onclick="openModal('jugador')">Postularme como jugador</button>
     <button class="btn-purple" onclick="openModal('staff')">Postularme como staff</button>
     <button class="btn-purple" onclick="openModal('creador')">Postularme como creador de contenido</button>
@@ -185,12 +186,13 @@
   <div class="container">
     <h2>Contacto</h2>
     <p>Para cualquier duda o consulta podés escribirnos a <strong>matedosis253@gmail.com</strong> o contactarnos por Discord.</p>
-    <a href="https://discord.gg/Xt4zuEkyKZ" class="btn-purple" target="_blank">Unirme al Discord</a>
+    <a href="https://discord.gg/tu-enlace" target="_blank" class="btn-purple">Unirme al Discord</a>
   </div>
 </section>
 
-<div id="modal" class="modal">
-  <div class="modal-content">
+<!-- Modal -->
+<div id="modal" class="modal" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
     <span class="close" onclick="closeModal()">&times;</span>
     <div id="modal-body"></div>
   </div>
@@ -211,42 +213,42 @@ function openModal(type) {
   if (type === 'jugador') {
     content = `<h2>Formulario para jugador</h2>
     <form class='modal-form' action="https://formsubmit.co/${email}" method="POST">
-      <input placeholder='Nombre o Nick' required>
-      <input placeholder='Elo actual' required>
-      <input placeholder='Rol principal' required>
-      <input placeholder='Disponibilidad horaria' required>
-      <textarea placeholder='Pool de campeones'></textarea>
-      <textarea placeholder='Estilo de juego'></textarea>
-      <textarea placeholder='Experiencia previa y expectativas'></textarea>
-      <input placeholder='Discord, Whatsapp o Instagram' required>
+      <input name="Nombre o Nick" placeholder='Nombre o Nick' required>
+      <input name="Elo actual" placeholder='Elo actual' required>
+      <input name="Rol principal" placeholder='Rol principal' required>
+      <input name="Disponibilidad horaria" placeholder='Disponibilidad horaria' required>
+      <textarea name="Pool de campeones" placeholder='Pool de campeones'></textarea>
+      <textarea name="Estilo de juego" placeholder='Estilo de juego'></textarea>
+      <textarea name="Experiencia previa y expectativas" placeholder='Experiencia previa y expectativas'></textarea>
+      <input name="Medio de contacto" placeholder='Discord, Whatsapp o Instagram' required>
       <button class='btn-purple' type='submit'>Enviar</button>
     </form>`;
   } else if (type === 'staff') {
     content = `<h2>Formulario para staff</h2>
     <form class='modal-form' action="https://formsubmit.co/${email}" method="POST">
-      <input placeholder='Nombre' required>
-      <input placeholder='Área de interés (ej: moderación, diseño gráfico, redes, etc)' required>
-      <textarea placeholder='Contanos tus habilidades o conocimientos útiles'></textarea>
-      <textarea placeholder='¿Tenés experiencia previa? Si no, contanos tus ganas de aprender'></textarea>
-      <input placeholder='Disponibilidad horaria'>
+      <input name="Nombre" placeholder='Nombre' required>
+      <input name="Área de interés" placeholder='Área de interés (ej: moderación, diseño gráfico, redes, etc)' required>
+      <textarea name="Habilidades o conocimientos útiles" placeholder='Contanos tus habilidades o conocimientos útiles'></textarea>
+      <textarea name="Experiencia o ganas de aprender" placeholder='¿Tenés experiencia previa? Si no, contanos tus ganas de aprender'></textarea>
+      <input name="Disponibilidad horaria" placeholder='Disponibilidad horaria'>
       <button class='btn-purple' type='submit'>Enviar</button>
     </form>`;
   } else if (type === 'creador') {
     content = `<h2>Formulario para creador de contenido</h2>
     <form class='modal-form' action="https://formsubmit.co/${email}" method="POST">
-      <input placeholder='Nombre' required>
-      <textarea placeholder='Redes sociales o links a contenido'></textarea>
-      <textarea placeholder='Conocimientos en edición, plataformas, etc.'></textarea>
-      <input placeholder='Disponibilidad horaria'>
+      <input name="Nombre" placeholder='Nombre' required>
+      <textarea name="Redes sociales o links" placeholder='Redes sociales o links a contenido'></textarea>
+      <textarea name="Conocimientos en edición" placeholder='Conocimientos en edición, plataformas, etc.'></textarea>
+      <input name="Disponibilidad horaria" placeholder='Disponibilidad horaria'>
       <button class='btn-purple' type='submit'>Enviar</button>
     </form>`;
   } else if (type === 'coach') {
     content = `<h2>Formulario para coach</h2>
     <form class='modal-form' action="https://formsubmit.co/${email}" method="POST">
-      <input placeholder='Nombre' required>
-      <textarea placeholder='Experiencia como coach'></textarea>
-      <textarea placeholder='Estilo de trabajo y áreas que te gustaría abordar'></textarea>
-      <input placeholder='Disponibilidad horaria'>
+      <input name="Nombre" placeholder='Nombre' required>
+      <textarea name="Experiencia como coach" placeholder='Experiencia como coach'></textarea>
+      <textarea name="Estilo de trabajo y áreas" placeholder='Estilo de trabajo y áreas que te gustaría abordar'></textarea>
+      <input name="Disponibilidad horaria" placeholder='Disponibilidad horaria'>
       <button class='btn-purple' type='submit'>Enviar</button>
     </form>`;
   }
@@ -264,3 +266,4 @@ window.onload = function () {
 </script>
 </body>
 </html>
+
